@@ -4,7 +4,8 @@ import heapq
 import random
 
 
-def grid_canvas(xlim: int, ylim: int, points: list[int], edges: list[tuple]) -> None:
+def grid_canvas(xlim: int, ylim: int, points: list[int], edges: list[tuple], 
+                color: str = 'purple') -> None:
     """
     Crea el gráfico de una cuadrícula [0, x] X [0, y]
     Colorea los puntos de la lista points y aristas de la lista edges
@@ -15,14 +16,13 @@ def grid_canvas(xlim: int, ylim: int, points: list[int], edges: list[tuple]) -> 
     y = [b for _, b in points]
     scale = 4  # Queda bonito en esta escala
 
-    plt.scatter(x, y, color='teal', s=scale, alpha=1, edgecolors='none')
+    plt.scatter(x, y, color=color, s=scale, alpha=1, edgecolors='none')
 
     for e in edges:
-        plt.plot([e[0][0], e[1][0]], [e[0][1], e[1][1]], color='purple')
+        plt.plot([e[0][0], e[1][0]], [e[0][1], e[1][1]], color=color)
 
     plt.xlim(0, xlim)
     plt.ylim(0, ylim)
-    plt.legend()
     plt.grid(True)
     plt.gca().set_aspect('equal')
 
@@ -126,16 +126,8 @@ if __name__ == "__main__":
     environment = fpp(n, n, lambda: random.expovariate(1))
     dists, ancestros = dijkstra(n, n, environment, (0, 0))
 
-    # for a in range(7):
-    #     for b in range(7):
-    #         plt.text(a, b, f"{dists[a, b]:.2f}", ha='center')
-
     for a in range(n + 1):
         for b in range(n + 1):
-            # for tupla, peso in environment[a, b]:
-            #     x = (a + tupla[0]) / 2
-            #     y = (b + tupla[1]) / 2
-            #     plt.text(x, y, f"{peso:.2f}", ha='center')
 
             if a == 0 and b == 0:
                 continue
